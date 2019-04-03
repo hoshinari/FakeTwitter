@@ -149,7 +149,7 @@ class Home extends StatefulWidget {
 }
 class _HomeState extends State<Home> {
   final String name;
-  int index = 1;
+  int i=0;
 
   _HomeState({this.name});
   @override
@@ -172,9 +172,32 @@ class _HomeState extends State<Home> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              //child: Text(this.name),
+              child: new Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:<Widget>[
+                  new Container(
+                    margin: const EdgeInsets.only(right: 1.0),
+                    child: new CircleAvatar(
+                      child: new Text(name[0]),
+                      maxRadius: 30,
+                    ),
+                  ),
+                  Container(  // 3.1.2行目
+                    child: Text(
+                      name,
+                      style: TextStyle(fontSize: 20.0, color: Colors.white70),
+                    ),
+                  ),
+                  Container(  // 3.1.2行目
+                    child: Text(
+                      "@hoshinari",
+                      style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                    ),
+                  ),
+                ],
+              ),
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.blueGrey[800],
               ),
 
             ),
@@ -194,20 +217,35 @@ class _HomeState extends State<Home> {
         ),
       ),
       bottomNavigationBar: new BottomNavigationBar(
-      currentIndex: index,
-      onTap: (int index) { setState((){ this.index = index; }); },
+      currentIndex: i,
+      type: BottomNavigationBarType.fixed,
+      onTap:(int index) {
+        setState(() {
+          i= index;
+        });
+      },
       items: <BottomNavigationBarItem>[
         new BottomNavigationBarItem(
           icon: new Icon(Icons.home),
-          title: new Text("Left"),
+          title: new Text("Home"),
         ),
         new BottomNavigationBarItem(
           icon: new Icon(Icons.search),
-          title: new Text("Right"),
+          title: new Text("Search"),
+        ),
+        new BottomNavigationBarItem(
+          icon: new Icon(Icons.add_alert),
+          title: new Text("Alert"),
+        ),
+        new BottomNavigationBarItem(
+          icon: new Icon(Icons.mail),
+          title: new Text("Mail"),
         ),
       ],
     ),
+    
     );
+    
   }
 
 }
